@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Dumbbell, Weight, RotateCcw, Calendar, Loader2, Target, Plus, Type, Sparkles, Activity } from 'lucide-react'
 import { useWorkoutContext } from "../hookes/useWorkoutContext";
+import { API_ENDPOINTS } from "../config/api";
 
 import WorkoutDetails from '../components/WorkDetails';
 import WorkOutForm from '../components/WorkOutForm';
@@ -13,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const response = await fetch('/api/workouts')
+        const response = await fetch(API_ENDPOINTS.WORKOUTS)
         const json = await response.json()
         
         if (response.ok) {

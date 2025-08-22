@@ -1,12 +1,13 @@
 import { useWorkoutContext } from "../hookes/useWorkoutContext"
 import { Target, Weight, RotateCcw, Calendar, Trash2, Trophy } from 'lucide-react'
+import { API_ENDPOINTS } from "../config/api";
 
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutContext()
 
   const handleClick = async () => {
     try {
-      const response = await fetch('/api/workouts/' + workout._id, {
+      const response = await fetch(API_ENDPOINTS.WORKOUT_BY_ID(workout._id), {
         method: 'DELETE'
       })
       

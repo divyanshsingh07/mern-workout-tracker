@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useWorkoutContext } from "../hookes/useWorkoutContext";
 import { Dumbbell, Weight, RotateCcw, Plus, Target, AlertCircle } from 'lucide-react'
+import { API_ENDPOINTS } from "../config/api";
 
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutContext()
@@ -14,7 +15,7 @@ const WorkoutForm = () => {
 
     const workout = { title, load, reps }
 
-    const response = await fetch('/api/workouts', {
+    const response = await fetch(API_ENDPOINTS.WORKOUTS, {
       method: 'POST',
       body: JSON.stringify(workout),
       headers: {
