@@ -9,14 +9,19 @@
     "build": "echo 'No build step required for Node.js backend'",
     "vercel-build": "echo 'Vercel build completed'"
   },
-  "keywords": ["workout", "tracker", "api", "backend"],
+  "keywords": [
+    "workout",
+    "tracker",
+    "api",
+    "backend"
+  ],
   "author": "Arsh",
   "license": "ISC",
   "description": "Workout Tracker Backend API",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "mongoose": "^8.17.1"
   },
   "engines": {

@@ -9,15 +9,8 @@ const app = express();
 // middleware to parse JSON request bodies
 app.use(express.json());
 
-// CORS middleware - configure for production
-app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://your-frontend-domain.vercel.app', 'https://your-frontend-domain.netlify.app'] // Add your frontend domains
-        : ['http://localhost:3000', 'http://localhost:3001'],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// Simple CORS middleware - temporarily simplified
+app.use(cors());
 
 // import router
 const workoutRouter = require('./router/workout.js');
