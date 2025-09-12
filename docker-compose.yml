@@ -1,0 +1,74 @@
+services:
+  #backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile.backend
+      target: dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://db:27017/mern_db
+    depends_on:
+      - db
+
+  #frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.frontend
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_API_BASE_URL=http://localhost:4000
+    depends_on:
+      - backend
+
+  #frontend production service
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.frontend
+      target: prod
+    ports:
+      - "8000:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_BASE_URL=http://localhost:8080
+    depends_on:
+      - backend-prod
+
+  #backend production service
+  backend-prod:
+    build:
+      context: ./backend
+      dockerfile: dockerfile.backend
+      target: prod
+    ports:
+      - "8080:4000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://db:27017/mern-prod
+    depends_on:
+      - db
+
+
+
+
+  #database service
+  db: 
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
