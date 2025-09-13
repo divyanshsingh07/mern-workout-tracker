@@ -37,7 +37,9 @@ A full-stack MERN application for tracking and managing your workouts with a mod
 - **Docker** - Containerization
 - **Docker Compose** - Multi-container orchestration
 - **Nginx** - Production web server
-- **Vercel** - Deployment platform support
+- **AWS EC2** - Cloud deployment support
+
+> **Note**: This project has been optimized for Docker deployment and AWS EC2. All Vercel-specific dependencies and configurations have been removed for better portability and control.
 
 ## 📁 Project Structure
 
@@ -78,7 +80,25 @@ WorkoutTracker/
    cd WorkoutTracker
    ```
 
-2. **Run with Docker Compose**
+2. **Quick Start (Development)**
+   ```bash
+   # Make startup script executable
+   chmod +x start.sh
+   
+   # Start the application
+   ./start.sh
+   ```
+
+3. **Production Start**
+   ```bash
+   # Make production script executable
+   chmod +x start-production.sh
+   
+   # Start production environment
+   ./start-production.sh
+   ```
+
+4. **Manual Docker Commands**
    ```bash
    # Development environment
    docker-compose up backend frontend
@@ -90,7 +110,7 @@ WorkoutTracker/
    docker-compose up
    ```
 
-3. **Access the application**
+5. **Access the application**
    - **Frontend**: http://localhost:3000 (dev) | http://localhost:8000 (prod)
    - **Backend API**: http://localhost:4000 (dev) | http://localhost:8080 (prod)
    - **Database**: localhost:27017
@@ -157,17 +177,13 @@ docker-compose build --no-cache backend-prod frontend-prod
 docker-compose up backend-prod frontend-prod
 ```
 
-### Vercel Deployment
-The project includes Vercel configuration files for easy deployment:
+### AWS EC2 Deployment
+The project includes AWS deployment configuration for easy cloud deployment:
 
 ```bash
-# Deploy backend to Vercel
-cd backend
-vercel --prod
-
-# Deploy frontend to Vercel
-cd frontend
-vercel --prod
+# Deploy to AWS EC2
+chmod +x deploy-aws.sh
+./deploy-aws.sh
 ```
 
 ## 🧪 Development Commands
