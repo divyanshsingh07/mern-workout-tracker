@@ -1,0 +1,45 @@
+services:
+  #backend production service for AWS
+  backend-prod:
+    build:
+      context: ./backend
+      dockerfile: dockerfile.backend
+      target: prod
+    ports:
+      - "8080:4000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://db:27017/mern-prod
+      - PORT=4000
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  #frontend production service for AWS
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile.frontend
+      target: prod
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - REACT_APP_API_BASE_URL=http://your-ec2-public-ip:8080
+    depends_on:
+      - backend-prod
+    restart: unless-stopped
+
+  #database service
+  db: 
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=mern-prod
+
+volumes:
+  mongo_data:
